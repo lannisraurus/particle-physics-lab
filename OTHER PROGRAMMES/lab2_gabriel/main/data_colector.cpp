@@ -1,6 +1,6 @@
 #include "data_colector.h"
 
-void replace_comma_with_period(string &line);
+void replace_a_with_b(string &line, string a, string b);
 void make_collected_data_document(ofstream &new_notepad, string notepad_name, vector<vector<double>> data);
 
 data_colector::data_colector(string notepad_name) {
@@ -11,7 +11,7 @@ data_colector::data_colector(string notepad_name) {
 
         line_pos += 1;
 
-        replace_comma_with_period(line);
+        replace_a_with_b(line, ",", ".");
 
         istringstream iss(line);
         double temp_data;
@@ -30,40 +30,56 @@ data_colector::data_colector(string notepad_name) {
             }
         }
     }
-
-    data.resize(cols_numb);
-
-    for (int i = 0; i < cols_numb; i++){
+    
+    if (cols_numb >= 1){
         
-        data[i].resize(lines_to_colect_pos.size());
+        data.resize(cols_numb);
+        
+        for (int i = 0; i < cols_numb; i++){
+            
+            data[i].resize(lines_to_colect_pos.size());
+        }
+
+        notepad.clear();
+        notepad.seekg(0);
+
+        for (int i = 0; i <= line_pos; i++){
+
+            getline(notepad, line);
+
+            replace_a_with_b(line, ",", ".");
+
+            if (lines_to_colect_pos.size() != 0 && colectable_line_numb < lines_to_colect_pos.size() 
+            && i == lines_to_colect_pos[colectable_line_numb]){
+
+                istringstream iss(line);
+                double temp_data;
+
+                for (int j = 0; j < cols_numb; j++){
+
+                    iss >> temp_data;
+                    data[j][colectable_line_numb] = temp_data;
+                }   
+
+                colectable_line_numb += 1;
+            }
+        }
+
+        make_collected_data_document(new_notepad, notepad_name, data);
     }
 
-    notepad.clear();
-    notepad.seekg(0);
+    else {
 
-    for (int i = 0; i <= line_pos; i++){
+        if (line_pos < 0){
 
-        getline(notepad, line);
+            cout << "The input document '" << notepad_name << "' is empty." << endl;
+        }
 
-        replace_comma_with_period(line);
+        else {
 
-        if (lines_to_colect_pos.size() != 0 && colectable_line_numb < lines_to_colect_pos.size() 
-        && i == lines_to_colect_pos[colectable_line_numb]){
-
-            istringstream iss(line);
-            double temp_data;
-
-            for (int j = 0; j < cols_numb; j++){
-
-                iss >> temp_data;
-                data[j][colectable_line_numb] = temp_data;
-            }
-
-            colectable_line_numb += 1;
+            cout << "No colectable doubles were recognized in the input document '" << notepad_name << "'." << endl;
         }
     }
-
-    make_collected_data_document(new_notepad, notepad_name, data);
 }
 
 vector<vector<double>> data_colector::get_data() const {
@@ -141,21 +157,21 @@ double data_colector::get_a_certain_col_min(int numb) const {
     return min_value;
 }
 
-void replace_comma_with_period(string &line) {
+void replace_a_with_b(string &line, string a, string b) {
 
     vector<int> pos;
     int temp_pos = 0;
         
-    while (line.find(",", temp_pos) != string::npos){
+    while (line.find(a, temp_pos) != string::npos){
             
-        temp_pos = line.find(",", temp_pos);
+        temp_pos = line.find(a, temp_pos);
         pos.push_back(temp_pos);
         temp_pos += 1;
     }
 
-    for (int i = 0; i < pos.size(); i++){
+    for (int i : pos){
             
-        line.replace(pos[i], 1, ".");
+        line.replace(i, 1, b);
     }
 }
 
