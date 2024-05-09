@@ -7,6 +7,16 @@
 #include <sstream>
 #include <vector>
 
+#include <cmath>
+
+#include "TApplication.h"
+#include "TCanvas.h"
+#include "TH1.h"
+#include "TF1.h"
+#include "TGraph.h"
+#include "TGraphErrors.h"
+#include "TSystem.h"
+
 using namespace std;
 
 class data_colector {

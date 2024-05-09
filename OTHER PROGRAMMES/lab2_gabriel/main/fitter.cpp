@@ -1,13 +1,5 @@
 #include "data_colector.cpp"
 
-#include <cmath>
-
-#include "TApplication.h"
-#include "TCanvas.h"
-#include "TH1.h"
-#include "TF1.h"
-#include "TSystem.h"
-
 int main(){
 
     data_colector test("test.txt");
