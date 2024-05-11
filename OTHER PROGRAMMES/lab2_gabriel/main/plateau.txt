@@ -1,11 +1,10 @@
-  Text file showing TNI GMX-PC Experimental data. 
-  Experiment Name:  Plotting a Geiger Plateau   
 
-
-   #       Counts  
-
-
-   
+  31,        102  
+  32,        101  
+  33,         84  
+  34,         91  
+  35,         96  
+  36,         84  
   37,        110  
   38,        108  
   39,        102  

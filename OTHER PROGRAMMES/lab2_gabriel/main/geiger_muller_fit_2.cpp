@@ -24,7 +24,7 @@ int main(){
     TCanvas* C = new TCanvas("C", "Canvas", 16*70, 9*70);
     TGraphErrors* g = new TGraphErrors(points_numb, x_ptr, y_ptr, ex_arr, ey_ptr);
     TF1* f = new TF1("f", "[0]");
-    TPaveText* pt = new TPaveText(975, 14, 1110, 16.5, "user");
+    TPaveText* pt = new TPaveText(975, 16, 1110, 17, "user");
 
     pt->SetTextSize(0.03);
     pt->SetFillColor(0);
@@ -33,18 +33,20 @@ int main(){
     g->SetMarkerStyle(8);
     g->SetMarkerColor(kBlack);
     g->GetXaxis()->SetTitle("Voltage (V)");
-    g->GetXaxis()->SetLimits(675, 1225);
-    g->GetXaxis()->SetNdivisions(-211);
+    g->GetXaxis()->SetLimits(725, 1225);
+    g->GetXaxis()->SetNdivisions(-210);
     g->GetXaxis()->SetLabelSize(0.028);
     g->GetYaxis()->SetTitle("Count rate (counts/s)");
-    g->GetYaxis()->SetRangeUser(11, 25);
-    g->GetYaxis()->SetNdivisions(-20214);
+    g->GetYaxis()->SetRangeUser(13, 25);
+    g->GetYaxis()->SetNdivisions(-20212);
     g->GetYaxis()->SetLabelSize(0.028);
     f->SetLineColor(kCyan);
 
     g->Draw("AP");
     g->Fit("f");
+    //pt->AddText(Form("y = ax + b (counts/s)"));
     pt->AddText(Form("y = %.2f %c %.2f (counts/s)", f->GetParameter(0), 0xB1, f->GetParError(0)));
+    //pt->AddText(Form("b = %.2f %c %.2f", f->GetParameter(1), 0xB1, f->GetParError(1)));
     pt->AddText(Form("#chi^{2} = %.2f", f->GetChisquare()));
     pt->Draw();
 

@@ -6,7 +6,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
-
+#include <array>
 #include <cmath>
 
 #include "TApplication.h"
@@ -15,6 +15,7 @@
 #include "TF1.h"
 #include "TGraph.h"
 #include "TGraphErrors.h"
+#include "TPaveText.h"
 #include "TSystem.h"
 
 using namespace std;
