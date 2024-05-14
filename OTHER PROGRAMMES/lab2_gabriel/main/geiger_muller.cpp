@@ -23,7 +23,7 @@ int main(){
     TApplication* A = new TApplication("A", 0, 0);
     TCanvas* C = new TCanvas("C", "Canvas", 16*70, 9*70);
     TGraphErrors* g = new TGraphErrors(points_numb, x_ptr, y_ptr, ex_arr, ey_ptr);
-    TF1* f = new TF1("f", "[0]");
+    TF1* f = new TF1("f", "[0] * x + [1]");
     TPaveText* pt = new TPaveText(975, 14, 1110, 16.5, "user");
 
     pt->SetTextSize(0.03);
@@ -44,8 +44,10 @@ int main(){
 
     g->Draw("AP");
     g->Fit("f");
-    pt->AddText(Form("y = %.2f %c %.2f (counts/s)", f->GetParameter(0), 0xB1, f->GetParError(0)));
-    pt->AddText(Form("#chi^{2} = %.2f", f->GetChisquare()));
+    pt->AddText(Form("y = ax + b (counts/s)"));
+    pt->AddText(Form("a = %.3f %c %.3f", f->GetParameter(0), 0xB1, f->GetParError(0)));
+    pt->AddText(Form("b = %.3f %c %.3f", f->GetParameter(1), 0xB1, f->GetParError(1)));
+    pt->AddText(Form("#chi^{2} = %.3f", f->GetChisquare()));
     pt->Draw();
 
     C->Update();

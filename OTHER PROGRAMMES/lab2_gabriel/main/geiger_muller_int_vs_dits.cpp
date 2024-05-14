@@ -2,18 +2,16 @@
 
 int main(){
     
-    data_colector gm("plateau.txt");
+    data_colector gm("dist_data.txt");
     vector<double> x = gm.get_a_certain_col(1);
     double ex_arr[x.size()] = {0};
     vector<double> y = gm.get_a_certain_col(2);
-    vector<double> ey;
+    vector<double> ey = gm.get_a_certain_col(3);
     Int_t points_numb = x.size();
 
     for (int i = 0; i < x.size(); i++){
 
-        x[i] = x[i] * 25;
-        ey.push_back(sqrt(y[i]) / 5);
-        y[i] = y[i] / 5;
+        x[i] = x[i] * 100;
     }
 
     double* x_ptr = &x[0];
@@ -23,30 +21,31 @@ int main(){
     TApplication* A = new TApplication("A", 0, 0);
     TCanvas* C = new TCanvas("C", "Canvas", 16*70, 9*70);
     TGraphErrors* g = new TGraphErrors(points_numb, x_ptr, y_ptr, ex_arr, ey_ptr);
-    TF1* f = new TF1("f", "[0] * x + [1]");
-    TPaveText* pt = new TPaveText(975, 14.5, 1110, 17, "user");
+    TF1* f = new TF1("f", "[0] * (1 - x * 0.01 / (x * * 0.0001 x + [1] * [1])^(0.5))");
+    TPaveText* pt = new TPaveText(3, 550, 4, 750, "user");
 
     pt->SetTextSize(0.03);
     pt->SetFillColor(0);
     pt->SetTextAlign(12);
     pt->SetTextFont(42);
-    g->SetMarkerStyle(8);
+    g->SetMarkerStyle(4);
     g->SetMarkerColor(kBlack);
-    g->GetXaxis()->SetTitle("Voltage (V)");
-    g->GetXaxis()->SetLimits(725, 1225);
-    g->GetXaxis()->SetNdivisions(-210);
+    g->GetXaxis()->SetTitle("Distance to detector entrance (cm)");
+    g->GetXaxis()->SetLimits(1, 5.8);
+    g->GetXaxis()->SetNdivisions(-412);
     g->GetXaxis()->SetLabelSize(0.028);
     g->GetYaxis()->SetTitle("Count rate (counts/s)");
-    g->GetYaxis()->SetRangeUser(13, 25);
-    g->GetYaxis()->SetNdivisions(-20212);
+    g->GetYaxis()->SetRangeUser(50, 1000);
+    g->GetYaxis()->SetNdivisions(-219);
     g->GetYaxis()->SetLabelSize(0.028);
     f->SetLineColor(kCyan);
 
     g->Draw("AP");
     g->Fit("f");
-    pt->AddText(Form("y = ax + b (counts/s)"));
+    pt->AddText(Form("y = a / (r + c)^{2} + b (counts/s)"));
     pt->AddText(Form("a = %.3f %c %.3f", f->GetParameter(0), 0xB1, f->GetParError(0)));
-    pt->AddText(Form("b = %.3f %c %.3f", f->GetParameter(1), 0xB1, f->GetParError(1)));
+    pt->AddText(Form("b = %.1f %c %.1f", f->GetParameter(1), 0xB1, f->GetParError(1)));
+    pt->AddText(Form("c = %.4f %c %.4f", f->GetParameter(2), 0xB1, f->GetParError(2)));
     pt->AddText(Form("#chi^{2} = %.3f", f->GetChisquare()));
     pt->Draw();
 
