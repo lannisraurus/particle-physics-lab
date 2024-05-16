@@ -2,8 +2,8 @@
 
 int main(){
     
-    data_colector alfa(".txt");
-    vector<double> x = alfa.get_a_certain_col(2);
+    data_colector alfa("cal_1_beta.txt");
+    vector<double> x = alfa.get_a_certain_col(1);
     vector<double> FWHM = alfa.get_a_certain_col(3);
     vector<double> N = alfa.get_a_certain_col(4);
     vector<double> ex;

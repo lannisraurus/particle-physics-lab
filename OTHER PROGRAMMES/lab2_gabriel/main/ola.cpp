@@ -47,7 +47,5 @@ int main(){
         cout << x[i] <<  " | " << y[i] << endl;
     }*/
 
-    
-
     return 0;
 }
