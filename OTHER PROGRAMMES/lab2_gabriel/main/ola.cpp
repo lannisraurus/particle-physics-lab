@@ -47,5 +47,37 @@ int main(){
         cout << x[i] <<  " | " << y[i] << endl;
     }*/
 
+    double x[5] = {15, 16, 17, 18, 19};
+    double y[5] = {13, 437, 1424, 542, 17};
+
+    TApplication* A = new TApplication("A", 0, 0);
+    TCanvas* C = new TCanvas("C", "Canvas", 16*70, 9*70);
+    TGraph* g = new TGraph(5, x, y);
+    TF1* f = new TF1("f", "1 / ([std_dev] * TMath::Sqrt(2 * TMath::Pi())) * TMath::Exp(-0.5 * pow((x - [mean]) / [std_dev], 2))");
+
+    g->SetMarkerStyle(4);
+    g->SetMarkerColor(kBlack);
+    g->GetXaxis()->SetTitle("");
+    g->GetXaxis()->SetLimits(15, 19);
+    g->GetXaxis()->SetNdivisions(-518);
+    g->GetXaxis()->SetLabelSize(0.028);
+    g->GetYaxis()->SetTitle("");
+    g->GetYaxis()->SetRangeUser(0, 1500);
+    g->GetYaxis()->SetNdivisions(-510);
+    g->GetYaxis()->SetLabelSize(0.028);
+    f->SetLineColor(kCyan);
+
+    g->Draw("AP");
+    g->Fit("f");
+
+    C->Update();
+    gSystem->ProcessEvents();
+    C->WaitPrimitive();
+
+    delete C;
+    delete g;
+    delete f;
+    delete A;
+
     return 0;
 }
