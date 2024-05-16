@@ -47,28 +47,37 @@ int main(){
         cout << x[i] <<  " | " << y[i] << endl;
     }*/
 
-    double x[5] = {15, 16, 17, 18, 19};
-    double y[5] = {13, 437, 1424, 542, 17};
+    double x[5] = {38, 39, 40, 41, 42};
+    double y[5] = {4, 236, 1428, 736, 27};   // ESTE É O SEGUNDO PULSO
+    int min = x[0];
+    int max = 42;
 
     TApplication* A = new TApplication("A", 0, 0);
     TCanvas* C = new TCanvas("C", "Canvas", 16*70, 9*70);
     TGraph* g = new TGraph(5, x, y);
-    TF1* f = new TF1("f", "1 / ([std_dev] * TMath::Sqrt(2 * TMath::Pi())) * TMath::Exp(-0.5 * pow((x - [mean]) / [std_dev], 2))");
+    //TF1* f = new TF1("f", "1 / ([std_dev] * TMath::Sqrt(2 * TMath::Pi())) * TMath::Exp(-0.5 * pow((x - [mean]) / [std_dev], 2))", 15, 19);
+    TF1* f = new TF1("f", "gaus", min, max);
+
+    //f->SetParameter("mean", 17);
+    //f->SetParameter("std_dev", 0.9);
+    f->SetParameter(0, 0.44);
+    f->SetParameter(1, 40);
+    f->SetParameter(2, 0.9);
 
     g->SetMarkerStyle(4);
     g->SetMarkerColor(kBlack);
-    g->GetXaxis()->SetTitle("");
-    g->GetXaxis()->SetLimits(15, 19);
-    g->GetXaxis()->SetNdivisions(-518);
+    g->GetXaxis()->SetTitle("Channels");
+    g->GetXaxis()->SetLimits(min, max);
+    g->GetXaxis()->SetNdivisions(-4);
     g->GetXaxis()->SetLabelSize(0.028);
-    g->GetYaxis()->SetTitle("");
-    g->GetYaxis()->SetRangeUser(0, 1500);
-    g->GetYaxis()->SetNdivisions(-510);
+    g->GetYaxis()->SetTitle("Absolute frequency");
+    g->GetYaxis()->SetRangeUser(0, 1700);
+    g->GetYaxis()->SetNdivisions(-515);
     g->GetYaxis()->SetLabelSize(0.028);
     f->SetLineColor(kCyan);
 
     g->Draw("AP");
-    g->Fit("f");
+    g->Fit("f", "R");
 
     C->Update();
     gSystem->ProcessEvents();
