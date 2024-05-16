@@ -27,7 +27,7 @@ int main(){
     delete f;
     delete A;*/
 
-    vector<int> x = {1, 2, 3, 4, 5};
+    /*vector<int> x = {1, 2, 3, 4, 5};
     vector<int> y = {10, 20, 30, 40, 50};
     vector<int> pos_to_erase = {1, 3};
     int counter = 0; 
@@ -45,7 +45,9 @@ int main(){
     for (int i = 0; i < x.size(); i++){
 
         cout << x[i] <<  " | " << y[i] << endl;
-    }
+    }*/
+
+    
 
     return 0;
 }
