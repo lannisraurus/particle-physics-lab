@@ -2,7 +2,7 @@
 
 int main(){
     
-    data_colector beta("LAB6_BIS_SPC.ASC");
+    data_colector beta("LAB6_BIS_AL_S.ASC");
     vector<double> x = beta.get_a_certain_col(1);
     vector<double> y = beta.get_a_certain_col(2);
 
@@ -61,8 +61,8 @@ int main(){
     g->SetLineColor(kBlue+2);
     g->SetLineWidth(1.75);
     g->GetXaxis()->SetTitle("Channels");
-    g->GetXaxis()->SetLimits(0, 300);
-    g->GetXaxis()->SetNdivisions(-530);
+    g->GetXaxis()->SetLimits(0, 200);
+    g->GetXaxis()->SetNdivisions(-520);
 
     /*g->GetXaxis()->SetLimits(0, 525);
     g->GetXaxis()->SetNdivisions(-521); LOG */
@@ -73,8 +73,8 @@ int main(){
     g->GetXaxis()->SetTitleOffset(1.3);
     g->GetYaxis()->SetTitle("Absolute frequency");
     g->GetYaxis()->SetLabelSize(0.028);
-    g->GetYaxis()->SetRangeUser(0, 10000);
-    g->GetYaxis()->SetNdivisions(-520);
+    g->GetYaxis()->SetRangeUser(0, 1800);
+    g->GetYaxis()->SetNdivisions(-418);
 
     /*g->GetYaxis()->SetRangeUser(0, 4.5);
     g->GetYaxis()->SetNdivisions(-509); LOG */
@@ -94,7 +94,7 @@ int main(){
     //pt->Draw();
 
     C->Update();
-    C->SaveAs("esp_ BIS.png");
+    C->SaveAs("esp_BIS_AL.png");
     gSystem->ProcessEvents();
     C->WaitPrimitive();
 
