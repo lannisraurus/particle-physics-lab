@@ -16,6 +16,7 @@
 #include "TGraph.h"
 #include "TGraphErrors.h"
 #include "TPaveText.h"
+#include "TLegend.h"
 #include "TSystem.h"
 #include "TMath.h"
 
