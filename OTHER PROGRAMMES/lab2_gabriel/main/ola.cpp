@@ -47,22 +47,26 @@ int main(){
         cout << x[i] <<  " | " << y[i] << endl;
     }*/
 
-    double x[5] = {38, 39, 40, 41, 42};
-    double y[5] = {4, 236, 1428, 736, 27};   // ESTE É O SEGUNDO PULSO
+    double x[5] = {261, 262, 263, 264, 265};
+    double y[5] = {80, 1033, 1188, 126, 2};
     int min = x[0];
-    int max = 42;
+    int max = x[sizeof(x) / sizeof(x[0]) - 1];
+    double counter = 0;
+
+    for (double i : y){
+
+        counter = counter + i;
+    }
+
+    cout << "N   " << counter << endl;
 
     TApplication* A = new TApplication("A", 0, 0);
     TCanvas* C = new TCanvas("C", "Canvas", 16*70, 9*70);
-    TGraph* g = new TGraph(5, x, y);
-    //TF1* f = new TF1("f", "1 / ([std_dev] * TMath::Sqrt(2 * TMath::Pi())) * TMath::Exp(-0.5 * pow((x - [mean]) / [std_dev], 2))", 15, 19);
+    TGraph* g = new TGraph(sizeof(x) / sizeof(x[0]), x, y);
     TF1* f = new TF1("f", "gaus", min, max);
 
     //f->SetParameter("mean", 17);
     //f->SetParameter("std_dev", 0.9);
-    f->SetParameter(0, 0.44);
-    f->SetParameter(1, 40);
-    f->SetParameter(2, 0.9);
 
     g->SetMarkerStyle(4);
     g->SetMarkerColor(kBlack);
@@ -71,7 +75,7 @@ int main(){
     g->GetXaxis()->SetNdivisions(-4);
     g->GetXaxis()->SetLabelSize(0.028);
     g->GetYaxis()->SetTitle("Absolute frequency");
-    g->GetYaxis()->SetRangeUser(0, 1700);
+    g->GetYaxis()->SetRangeUser(0, 2500);
     g->GetYaxis()->SetNdivisions(-515);
     g->GetYaxis()->SetLabelSize(0.028);
     f->SetLineColor(kCyan);
