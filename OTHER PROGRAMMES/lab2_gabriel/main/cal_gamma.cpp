@@ -6,8 +6,13 @@ int main(){
     vector<double> x = beta.get_a_certain_col(1);
     vector<double> ex = beta.get_a_certain_col(2);
     vector<double> y = beta.get_a_certain_col(3);
-    vector<double> ey = beta.get_a_certain_col(4);
+    vector<double> ey;
     Int_t points_numb = x.size();
+
+    for (int i = 0; i < x.size(); i++){
+
+        ey.push_back(0);
+    }
 
     double* x_ptr = &x[0];
     double* ex_ptr = &ex[0];
@@ -18,22 +23,22 @@ int main(){
     TCanvas* C = new TCanvas("C", "Canvas", 16*70, 9*70);
     TGraphErrors* g = new TGraphErrors(points_numb, x_ptr, y_ptr, ex_ptr, ey_ptr);
     TF1* f = new TF1("f", "[0] * x + [1]");
-    TPaveText* pt = new TPaveText(50, 0.7, 150, 1.1, "user");
+    TPaveText* pt = new TPaveText(100, 700, 200, 1000, "user");
 
     pt->SetTextSize(0.035);
     pt->SetFillColor(0);
     pt->SetTextAlign(12);
     pt->SetTextFont(42);
     g->SetMarkerStyle(4);
-    g->SetMarkerSize(0.35);
+    g->SetMarkerSize(1); //0.35
     g->SetMarkerColor(kBlack);
     g->GetXaxis()->SetTitle("Channels");
-    g->GetXaxis()->SetLimits(0, 275);
-    g->GetXaxis()->SetNdivisions(-20511);
+    g->GetXaxis()->SetLimits(0, 1000);
+    g->GetXaxis()->SetNdivisions(-520);
     g->GetXaxis()->SetLabelSize(0.028);
-    g->GetYaxis()->SetTitle("Energy (pulser units)");
-    g->GetYaxis()->SetRangeUser(0, 1.3);
-    g->GetYaxis()->SetNdivisions(-513);
+    g->GetYaxis()->SetTitle("Energy (keV)");
+    g->GetYaxis()->SetRangeUser(0, 1400);
+    g->GetYaxis()->SetNdivisions(-514);
     g->GetYaxis()->SetLabelSize(0.028);
     f->SetLineColor(kCyan);
 
@@ -46,7 +51,7 @@ int main(){
     pt->Draw();
 
     C->Update();
-    C->SaveAs("cal_1_beta.png");
+    C->SaveAs("cal_gamma.png");
     gSystem->ProcessEvents();
     C->WaitPrimitive();
 
