@@ -25,12 +25,15 @@ int main(){
     TF1* f = new TF1("f", "[0] * x + [1]");
     TPaveText* pt = new TPaveText(100, 700, 200, 1000, "user");
 
+    f->SetParameter(0, 1.54);
+    f->SetParameter(1, 0);
+
     pt->SetTextSize(0.035);
     pt->SetFillColor(0);
     pt->SetTextAlign(12);
     pt->SetTextFont(42);
     g->SetMarkerStyle(4);
-    g->SetMarkerSize(1); //0.35
+    g->SetMarkerSize(0.35);
     g->SetMarkerColor(kBlack);
     g->GetXaxis()->SetTitle("Channels");
     g->GetXaxis()->SetLimits(0, 1000);
