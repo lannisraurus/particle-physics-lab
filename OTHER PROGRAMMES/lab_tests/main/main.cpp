@@ -131,6 +131,10 @@ int main(){
     }
 
     TGraphErrors* g3 = new TGraphErrors(Xl.size(), Xl.data(), Yl.data(), eXl.data(), eYl.data());
+    TF1* f = new TF1("f", "[0]*x + [1]",0,10);
+    f->SetParameter(0,-4.565);
+    f->SetParameter(1,6.695);
+    f->SetLineColor(kOrange);
 
     g3->SetTitle("");
     g3->SetMarkerStyle(4);
@@ -149,10 +153,29 @@ int main(){
     g3->GetYaxis()->SetRangeUser(0, 5);
     g3->GetYaxis()->SetNdivisions(-510);
 
-
-    TF1* f = new TF1("f", "[0] * x + [1]");
-    g3->Draw("AP");
     g3->Fit("f");
+
+
+    TPaveText* pt = new TPaveText(1.12, 3, 1.6, 4, "user");
+
+    pt->SetTextSize(0.03);
+    pt->SetFillColor(0);
+    pt->SetTextAlign(12);
+    pt->SetTextFont(42);
+
+    pt->AddText(Form("y = ax + b"));
+    pt->AddText(Form("a = %.10f %c %.10f", f->GetParameter(0), 0xB1, f->GetParError(0)));
+    pt->AddText(Form("b = %.10f %c %.10f", f->GetParameter(1), 0xB1, f->GetParError(1)));
+    pt->AddText(Form("#chi^{2} = %.10f", f->GetChisquare()));
+    
+
+    
+    g3->Draw("AP");
+    f->Draw("same");
+    pt->Draw("same");
+    
+    std::cout << "Chi squared: " << f->GetChisquare() << "\n";
+
 
 
 

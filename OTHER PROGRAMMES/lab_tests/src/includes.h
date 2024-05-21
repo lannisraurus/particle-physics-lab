@@ -19,6 +19,7 @@
 #include "TGraph.h"
 #include "TGraphErrors.h"
 #include "TStyle.h"
+#include "TPaveText.h"
 
 #include "TH1F.h"
 #include "TH1.h"
