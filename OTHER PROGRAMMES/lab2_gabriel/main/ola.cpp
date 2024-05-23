@@ -47,8 +47,8 @@ int main(){
         cout << x[i] <<  " | " << y[i] << endl;
     }*/
 
-    double x[5] = {261, 262, 263, 264, 265};
-    double y[5] = {80, 1033, 1188, 126, 2};
+    double x[4] = {216, 217, 218, 219};
+    double y[4] = {66, 499, 231, 12};
     int min = x[0];
     int max = x[sizeof(x) / sizeof(x[0]) - 1];
     double counter = 0;
@@ -75,7 +75,7 @@ int main(){
     g->GetXaxis()->SetNdivisions(-4);
     g->GetXaxis()->SetLabelSize(0.028);
     g->GetYaxis()->SetTitle("Absolute frequency");
-    g->GetYaxis()->SetRangeUser(0, 2500);
+    g->GetYaxis()->SetRangeUser(0, 600);
     g->GetYaxis()->SetNdivisions(-515);
     g->GetYaxis()->SetLabelSize(0.028);
     f->SetLineColor(kCyan);

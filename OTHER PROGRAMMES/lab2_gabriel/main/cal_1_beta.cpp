@@ -20,14 +20,17 @@ int main(){
     TF1* f = new TF1("f", "[0] * x + [1]");
     TPaveText* pt = new TPaveText(50, 0.7, 150, 1.1, "user");
 
+    f->SetParameter(0, 0.00431);
+    f->SetParameter(1, 0);
+
     pt->SetTextSize(0.035);
     pt->SetFillColor(0);
     pt->SetTextAlign(12);
     pt->SetTextFont(42);
     g->SetMarkerStyle(4);
-    g->SetMarkerSize(0.35);
+    g->SetMarkerSize(1);
     g->SetMarkerColor(kBlack);
-    g->GetXaxis()->SetTitle("Channels");
+    g->GetXaxis()->SetTitle("Channel");
     g->GetXaxis()->SetLimits(0, 275);
     g->GetXaxis()->SetNdivisions(-20511);
     g->GetXaxis()->SetLabelSize(0.028);
@@ -39,14 +42,15 @@ int main(){
 
     g->Draw("AP");
     g->Fit("f");
+    // gStyle->SetOptFit(1); Outro método para adicionar uma label com os valores e incertezas dos parâmetros do fit e o chi quadrado
     pt->AddText(Form("y = ax + b"));
-    pt->AddText(Form("a = %.10f %c %.10f", f->GetParameter(0), 0xB1, f->GetParError(0)));
-    pt->AddText(Form("b = %.10f %c %.10f", f->GetParameter(1), 0xB1, f->GetParError(1)));
+    pt->AddText(Form("a = %.6f %c %.6f", f->GetParameter(0), 0xB1, f->GetParError(0)));
+    pt->AddText(Form("b = %.4f %c %.4f", f->GetParameter(1), 0xB1, f->GetParError(1)));
     pt->AddText(Form("#chi^{2} = %.2f", f->GetChisquare()));
     pt->Draw();
 
     C->Update();
-    C->SaveAs("cal_1_beta.png");
+    //C->SaveAs("cal_1_beta_corr.png");
     gSystem->ProcessEvents();
     C->WaitPrimitive();
 

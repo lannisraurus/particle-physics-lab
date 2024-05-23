@@ -2,11 +2,19 @@
 
 int main(){
     
-    data_colector beta("LAB6_TL_SPCTR.ASC");
+    data_colector beta("LAB6_BIS_SPC.ASC");
     vector<double> x = beta.get_a_certain_col(1);
+    vector<double> ex;
     vector<double> y = beta.get_a_certain_col(2);
+    vector<double> ey;
     
-    
+    for (int i = 0; i < x.size(); i++){
+        
+        ex.push_back(sqrt(pow(x[i] * 0.016, 2) + pow(1.6, 2)));
+        x[i] = x[i] * 4.543 + 17.8;
+        ey.push_back(sqrt(y[i]));
+    }
+
     /*vector<int> pos_to_erase;
     int counter = 0;
 
@@ -32,12 +40,14 @@ int main(){
     } LOG */
 
     double* x_ptr = &x[0];
+    double* ex_ptr = &ex[0];
     double* y_ptr = &y[0];
+    double* ey_ptr = &ey[0];
     Int_t points_numb = x.size();
 
     TApplication* A = new TApplication("A", 0, 0);
     TCanvas* C = new TCanvas("C", "Canvas", 16*70, 9*70);
-    TGraph* g = new TGraph(points_numb, x_ptr, y_ptr);
+    TGraphErrors* g = new TGraphErrors(points_numb, x_ptr, y_ptr, ex_ptr, ey_ptr);
     /*TF1* f1 = new TF1("f1", "gaus", 415, 431);
     TF1* f2 = new TF1("f2", "gaus", 431, 465.6);
     TF1* f3 = new TF1("f3", "gaus", 465.6, 575);*/
@@ -52,19 +62,18 @@ int main(){
     f3->SetParameter(0, 1 / ( 10.96 / 2.355 * sqrt(2 * M_PI)));
     f3->SetParameter(1, 477.59);
     f3->SetParameter(2, 10.96 / 2.355);*/
-
-
+    
     /*pt->SetTextSize(0.032);
     pt->SetFillColor(0);
     pt->SetTextAlign(12);
     pt->SetTextFont(42);*/
     g->SetMarkerStyle(4);
-    g->SetMarkerColor(kMagenta+2);
-    g->SetLineColor(kMagenta+4);
+    g->SetMarkerColor(kAzure+2);
+    g->SetLineColor(kBlue+2);
     g->SetLineWidth(1.75);
-    g->GetXaxis()->SetTitle("Channel");
-    g->GetXaxis()->SetLimits(0, 150);
-    g->GetXaxis()->SetNdivisions(-515);
+    g->GetXaxis()->SetTitle("Energy (keV)");
+    g->GetXaxis()->SetLimits(5, 1155);
+    g->GetXaxis()->SetNdivisions(-523);
 
     /*g->GetXaxis()->SetLimits(0, 525);
     g->GetXaxis()->SetNdivisions(-521); LOG */
@@ -74,9 +83,10 @@ int main(){
     g->GetXaxis()->SetLabelOffset(0.033);
     g->GetXaxis()->SetTitleOffset(1.3);
     g->GetYaxis()->SetTitle("Absolute frequency");
+    g->GetYaxis()->SetTickLength(0.02);
     g->GetYaxis()->SetLabelSize(0.028);
-    g->GetYaxis()->SetRangeUser(0, 1000);
-    g->GetYaxis()->SetNdivisions(-510);
+    g->GetYaxis()->SetRangeUser(0, 9500);
+    g->GetYaxis()->SetNdivisions(-419);
 
     /*g->GetYaxis()->SetRangeUser(0, 4.5);
     g->GetYaxis()->SetNdivisions(-509); LOG */
@@ -96,7 +106,7 @@ int main(){
     //pt->Draw();
 
     C->Update();
-    C->SaveAs("esp_TL.png");
+    C->SaveAs("esp_BIS_energy.png");
     gSystem->ProcessEvents();
     C->WaitPrimitive();
 

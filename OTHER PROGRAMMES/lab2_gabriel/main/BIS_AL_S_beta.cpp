@@ -60,9 +60,9 @@ int main(){
     g->SetMarkerColor(kAzure+2);
     g->SetLineColor(kBlue+2);
     g->SetLineWidth(1.75);
-    g->GetXaxis()->SetTitle("Channels");
-    g->GetXaxis()->SetLimits(0, 200);
-    g->GetXaxis()->SetNdivisions(-520);
+    g->GetXaxis()->SetTitle("Channel");
+    g->GetXaxis()->SetLimits(0, 150);
+    g->GetXaxis()->SetNdivisions(-515);
 
     /*g->GetXaxis()->SetLimits(0, 525);
     g->GetXaxis()->SetNdivisions(-521); LOG */
@@ -83,7 +83,7 @@ int main(){
     f2->SetLineColor(kCyan);
     f3->SetLineColor(kRed-4);*/
 
-    g->Draw("");
+    g->Draw("APL");
     /*g->Fit("f1", "R");
     g->Fit("f2", "R+");
     g->Fit("f3", "R+");*/

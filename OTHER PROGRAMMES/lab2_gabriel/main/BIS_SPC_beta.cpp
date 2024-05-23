@@ -60,9 +60,9 @@ int main(){
     g->SetMarkerColor(kAzure+2);
     g->SetLineColor(kBlue+2);
     g->SetLineWidth(1.75);
-    g->GetXaxis()->SetTitle("Channels");
-    g->GetXaxis()->SetLimits(0, 300);
-    g->GetXaxis()->SetNdivisions(-530);
+    g->GetXaxis()->SetTitle("Channel");
+    g->GetXaxis()->SetLimits(0, 250);
+    g->GetXaxis()->SetNdivisions(-525);
 
     /*g->GetXaxis()->SetLimits(0, 525);
     g->GetXaxis()->SetNdivisions(-521); LOG */
@@ -72,9 +72,10 @@ int main(){
     g->GetXaxis()->SetLabelOffset(0.033);
     g->GetXaxis()->SetTitleOffset(1.3);
     g->GetYaxis()->SetTitle("Absolute frequency");
+    g->GetYaxis()->SetTickLength(0.02);
     g->GetYaxis()->SetLabelSize(0.028);
-    g->GetYaxis()->SetRangeUser(0, 10000);
-    g->GetYaxis()->SetNdivisions(-520);
+    g->GetYaxis()->SetRangeUser(0, 9500);
+    g->GetYaxis()->SetNdivisions(-419);
 
     /*g->GetYaxis()->SetRangeUser(0, 4.5);
     g->GetYaxis()->SetNdivisions(-509); LOG */
@@ -83,7 +84,7 @@ int main(){
     f2->SetLineColor(kCyan);
     f3->SetLineColor(kRed-4);*/
 
-    g->Draw("");
+    g->Draw("APL");
     /*g->Fit("f1", "R");
     g->Fit("f2", "R+");
     g->Fit("f3", "R+");*/
@@ -94,7 +95,7 @@ int main(){
     //pt->Draw();
 
     C->Update();
-    C->SaveAs("esp_ BIS.png");
+    C->SaveAs("esp_BIS.png");
     gSystem->ProcessEvents();
     C->WaitPrimitive();
 

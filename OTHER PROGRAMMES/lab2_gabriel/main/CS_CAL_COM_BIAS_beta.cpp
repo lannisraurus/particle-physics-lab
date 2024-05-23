@@ -6,7 +6,6 @@ int main(){
     vector<double> x = beta.get_a_certain_col(1);
     vector<double> y = beta.get_a_certain_col(2);
     
-    
     /*vector<int> pos_to_erase;
     int counter = 0;
 
@@ -62,7 +61,7 @@ int main(){
     g->SetMarkerColor(kGreen-3);
     g->SetLineColor(kGreen+4);
     g->SetLineWidth(1.75);
-    g->GetXaxis()->SetTitle("Channels");
+    g->GetXaxis()->SetTitle("Channel");
     g->GetXaxis()->SetLimits(0, 150);
     g->GetXaxis()->SetNdivisions(-515);
 
@@ -76,7 +75,7 @@ int main(){
     g->GetYaxis()->SetTitle("Absolute frequency");
     g->GetYaxis()->SetLabelSize(0.028);
     g->GetYaxis()->SetRangeUser(0, 5000);
-    g->GetYaxis()->SetNdivisions(-520);
+    g->GetYaxis()->SetNdivisions(-510);
 
     /*g->GetYaxis()->SetRangeUser(0, 4.5);
     g->GetYaxis()->SetNdivisions(-509); LOG */
@@ -85,7 +84,7 @@ int main(){
     f2->SetLineColor(kCyan);
     f3->SetLineColor(kRed-4);*/
 
-    g->Draw("");
+    g->Draw("APL");
     /*g->Fit("f1", "R");
     g->Fit("f2", "R+");
     g->Fit("f3", "R+");*/
