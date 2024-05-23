@@ -32,21 +32,21 @@ int main(){
     std::vector<double> fermi_y = {28.26, 28.19, 27.99, 27.67, 27.25, 26.76, 26.23, 25.66, 25.09, 24.53, 23.98, 22.95, 22.01, 21.17, 20.41, 19.72, 19.10, 18,54};
 
 
-    in.open("data.txt");
+    in.open("input/betas.txt");
     while(!in.eof()){
         in >> x >> y;
 
-        X.push_back( 5.273*x + 20.6 );
+        X.push_back( 4.543*x + 17.8 );
         Y.push_back(y);
 
-        eX.push_back( 0.085*x + 7.0 );
+        eX.push_back( 0.016*x + 1.6 );
         eY.push_back( sqrt(y) );
     }
 
     TCanvas* C = new TCanvas("C", "Canvas", 16*70, 9*70);
     TGraphErrors* g = new TGraphErrors(X.size(), X.data(), Y.data(), eX.data(), eY.data());
 
-    g->SetTitle("Thalium peak in energies, using cesium calibration.");
+    g->SetTitle("Thalium peak in energies, using bismuth calibration.");
     g->SetMarkerStyle(4);
     g->SetMarkerColor(kAzure+2);
     g->SetLineColor(kBlue+2);
@@ -65,7 +65,7 @@ int main(){
 
     g->Draw("");
     C->Update();
-    C->SaveAs("Tl_Cs_Spectrum.png");
+    C->SaveAs("output/Tl_Cs_Spectrum.png");
     C->Clear();
 
 
@@ -118,7 +118,7 @@ int main(){
 
     g2->Draw("");
     C->Update();
-    C->SaveAs("endpoint.png");
+    C->SaveAs("output/endpoint.png");
     C->Clear();
 
 
@@ -135,6 +135,7 @@ int main(){
     f->SetParameter(0,-4.565);
     f->SetParameter(1,6.695);
     f->SetLineColor(kOrange);
+    f->SetLineWidth(3);
 
     g3->SetTitle("");
     g3->SetMarkerStyle(4);
@@ -167,6 +168,7 @@ int main(){
     pt->AddText(Form("a = %.10f %c %.10f", f->GetParameter(0), 0xB1, f->GetParError(0)));
     pt->AddText(Form("b = %.10f %c %.10f", f->GetParameter(1), 0xB1, f->GetParError(1)));
     pt->AddText(Form("#chi^{2} = %.10f", f->GetChisquare()));
+    pt->AddText(Form("Number of points = %i", int(Xl.size())));
     
 
     
@@ -181,7 +183,7 @@ int main(){
 
     
     C->Update();
-    C->SaveAs("endpoint2.png");
+    C->SaveAs("output/endpoint2.png");
     C->Clear();
 
 
