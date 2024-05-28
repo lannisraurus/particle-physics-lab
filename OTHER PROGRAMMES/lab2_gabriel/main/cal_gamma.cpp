@@ -2,10 +2,10 @@
 
 int main(){
     
-    data_colector beta("cal_gamma.txt");
-    vector<double> x = beta.get_a_certain_col(1);
-    vector<double> ex = beta.get_a_certain_col(2);
-    vector<double> y = beta.get_a_certain_col(3);
+    data_colector gamma("cal_gamma.txt");
+    vector<double> x = gamma.get_a_certain_col(1);
+    vector<double> ex = gamma.get_a_certain_col(2);
+    vector<double> y = gamma.get_a_certain_col(3);
     vector<double> ey;
     Int_t points_numb = x.size();
 
