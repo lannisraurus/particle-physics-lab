@@ -14,6 +14,7 @@ int main(){
 
     for (int i = 0; i < x.size(); i++){
 
+        y1[i] = (y1[i] / seconds1 - y2[i] / seconds2) * seconds1;
     }
 
     return 0;
