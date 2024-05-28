@@ -1,6 +1,6 @@
 #include "data_colector.cpp"
 
-double get_seconds(string file_name);
+string get_seconds(string file_name);
 
 int main(){
     
@@ -16,10 +16,10 @@ int main(){
     vector<double> y2 = gamma2.get_a_certain_col(2);
     double seconds2;
 
-    seconds1 = get_seconds(name);
-    seconds2 = get_seconds(bg);
+    //seconds1 = get_seconds(name);
+    //seconds2 = get_seconds(bg);
 
-    cout << "seconds1 = " << seconds1 << " | " << "seconds2 = " << seconds2 << endl;
+    cout << "seconds1 = " << get_seconds(name) << " | " << "seconds2 = " << get_seconds(bg) << endl;
 
     for (int i = 0; i < points_numb; i++){
 
@@ -50,15 +50,15 @@ int main(){
     return 0;
 }
 
-double get_seconds(string file_name) {
+string get_seconds(string file_name) {
 
     ifstream time_finder;
     time_finder.open(file_name);
     string first_line;
     istringstream iss(first_line);
-    double sec;
+    string sec;
 
-    geltine(time_finder, first_line);
+    getline(time_finder, first_line);
 
     while (iss.eof() == 0){
 
