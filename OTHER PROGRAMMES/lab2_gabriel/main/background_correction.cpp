@@ -1,25 +1,23 @@
 #include "data_colector.cpp"
 
-string get_seconds(string file_name);
+double get_seconds(string file_name);
 
 int main(){
     
-    string name = "LAB8_CSPB0.ASC"; // varia
+    string name = "LAB8_CSPB0.ASC"; // mudar ficheiro a retirar o fundo
     data_colector gamma1(name);
     vector<double> x1 = gamma1.get_a_certain_col(1);
     vector<double> y1 = gamma1.get_a_certain_col(2);
     double seconds1;
     Int_t points_numb = x1.size();
-    string bg = "LAB7_FUNDO.ASC"; // varia
+    string bg = "LAB7_FUNDO.ASC"; // mudar fundo
     data_colector gamma2(bg);
     vector<double> x2 = gamma2.get_a_certain_col(1);
     vector<double> y2 = gamma2.get_a_certain_col(2);
     double seconds2;
 
-    //seconds1 = get_seconds(name);
-    //seconds2 = get_seconds(bg);
-
-    cout << "seconds1 = " << get_seconds(name) << " | " << "seconds2 = " << get_seconds(bg) << endl;
+    seconds1 = get_seconds(name);
+    seconds2 = get_seconds(bg);
 
     for (int i = 0; i < points_numb; i++){
 
@@ -50,20 +48,22 @@ int main(){
     return 0;
 }
 
-string get_seconds(string file_name) {
+double get_seconds(string file_name) {
 
     ifstream time_finder;
     time_finder.open(file_name);
     string first_line;
-    istringstream iss(first_line);
-    string sec;
-
     getline(time_finder, first_line);
+    istringstream iss(first_line);
+    string skip;
+    double sec;
 
-    while (iss.eof() == 0){
+    for (int i = 1; i <= 10; i++){
 
-        iss >> sec;
+        iss >> skip;
     }
+
+    iss >> sec;
 
     return sec;
 }
