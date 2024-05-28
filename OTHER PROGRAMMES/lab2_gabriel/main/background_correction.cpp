@@ -18,35 +18,20 @@ int main(){
 
         y1[i] = (y1[i] / seconds1 - y2[i] / seconds2) * seconds1;
     }
-    
+
+    ofstream bg_corr_txt;
     string bg_corr_name = "bg_corr_";
 
     bg_corr_name.append(name);
 
     new_notepad.open(bg_corr_name);
 
-    for (int i = 0; i < data[0].size(); i++){
-        
-        for (int j = 0; j < data.size(); j++){
-            
-            if (j == data.size() - 1){
-                
-                new_notepad << data[j][i];
-            }
-            
-            else {
+    for (int i = 0; i < x1.size(); i++){
 
-                new_notepad << data[j][i] << " ";
-            }
-        }
-        
-        if (i < data[0].size() - 1){
-
-            new_notepad << endl;
-        }
+        bg_corr_name << x1[i] << " " << y1[i] << endl;
     }
-
-    new_notepad.close();
+    
+    bg_corr_txt.close();
 
     return 0;
 }
