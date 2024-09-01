@@ -114,8 +114,8 @@ int main(){
 
     fitAndDrawGaussianCurves(X,eX,Y,eY,475,500, 0,-5);
     
-    fitAndDrawGaussianCurves(X,eX,Y,eY,550,570, 0 ,-5);
-    fitAndDrawGaussianCurves(X,eX,Y,eY,567,585, 0.2,-10);
+    fitAndDrawGaussianCurves(X,eX,Y,eY,545,570, 0 ,-5);
+    fitAndDrawGaussianCurves(X,eX,Y,eY,567,590, 0.2,-10);
 
     fitAndDrawGaussianCurves(X,eX,Y,eY,960,990, -1.5,-10);
     
