@@ -2,11 +2,11 @@
 
 int main(){
 
-    data_colector alfa1("LAB5_AM_VACUO.ASC");
+    data_colector alfa1("input/LAB5_AM_VACUO.ASC");
     vector<double> x1 = alfa1.get_a_certain_col(1);
     vector<double> y1 = alfa1.get_a_certain_col(2);
 
-    data_colector alfa2("LAB5_AM_AR.ASC");
+    data_colector alfa2("input/LAB5_AM_AR.ASC");
     vector<double> x2 = alfa2.get_a_certain_col(1);
     vector<double> y2 = alfa2.get_a_certain_col(2);
     
@@ -88,7 +88,7 @@ int main(){
     g1->Draw("PL SAME");
 
     C->Update();
-    C->SaveAs("2_lines_aten_mat.png");
+    C->SaveAs("output/2_lines_aten_mat.png");
     gSystem->ProcessEvents();
     C->WaitPrimitive();
 

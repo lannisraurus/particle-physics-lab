@@ -2,19 +2,17 @@
 
 int main(){
     
-    data_colector alfa("alfa_3_data.txt");
-    vector<double> x = alfa.get_a_certain_col(2);
-    vector<double> FWHM = alfa.get_a_certain_col(3);
-    vector<double> N = alfa.get_a_certain_col(4);
+    data_colector alfa("input/alfa1_data.txt");
+    vector<double> x = alfa.get_a_certain_col(1);
+    vector<double> FWHM = alfa.get_a_certain_col(2);
+    vector<double> N = alfa.get_a_certain_col(3);
     vector<double> ex;
-    vector<double> y = alfa.get_a_certain_col(1);
+    vector<double> y;
     vector<double> ey;
     Int_t points_numb = x.size();
     double peak_energy_MeV = 5.3044;
     double chn = 372.45;
     double echn = 11.15 / 2.355 / sqrt(1861);
-    double e_peak_p_units_MeV = 5.14235;
-    double inc_e_peak_p_units_MeV = sqrt(pow(echn * 1.73064 * 0.001, 2) + pow(2.67061 * 0.00001 * 5.3044, 2) + pow(1.21344 * 0.01, 2));
 
     for (int i = 0; i < x.size(); i++){
         
@@ -23,9 +21,8 @@ int main(){
     
     for (int i = 0; i < x.size(); i++){
         
-        ey.push_back(sqrt(pow(- y[i] * peak_energy_MeV / pow(5.14235, 2) * inc_e_peak_p_units_MeV, 2) + pow(peak_energy_MeV / e_peak_p_units_MeV * 0.01, 2)));
-        y[i] = y[i] * peak_energy_MeV / e_peak_p_units_MeV;
-
+        y.push_back(x[i] * peak_energy_MeV / chn);
+        ey.push_back(sqrt(pow(- x[i] * peak_energy_MeV / pow(chn, 2)  * echn, 2) + pow(peak_energy_MeV / chn * ex[i], 2)));
     }
 
     double* x_ptr = &x[0];
@@ -37,7 +34,7 @@ int main(){
     TCanvas* C = new TCanvas("C", "Canvas", 16*70, 9*70);
     TGraphErrors* g = new TGraphErrors(points_numb, x_ptr, y_ptr, ex_ptr, ey_ptr);
     TF1* f = new TF1("f", "[0] * x + [1]");
-    TPaveText* pt = new TPaveText(450, 4.6, 600, 5.25, "user");
+    TPaveText* pt = new TPaveText(225, 7, 325, 9, "user");
 
     pt->SetTextSize(0.03);
     pt->SetFillColor(0);
@@ -46,12 +43,12 @@ int main(){
     g->SetMarkerStyle(4);
     g->SetMarkerColor(kBlack);
     g->GetXaxis()->SetTitle("Channels");
-    g->GetXaxis()->SetLimits(200, 650);
-    g->GetXaxis()->SetNdivisions(-209);
+    g->GetXaxis()->SetLimits(200, 750);
+    g->GetXaxis()->SetNdivisions(-210);
     g->GetXaxis()->SetLabelSize(0.028);
-    g->GetYaxis()->SetTitle("Energy (MeV)");
-    g->GetYaxis()->SetRangeUser(4.5, 6);
-    g->GetYaxis()->SetNdivisions(-506);
+    g->GetYaxis()->SetTitle("Real energy (MeV)");
+    g->GetYaxis()->SetRangeUser(2, 10);
+    g->GetYaxis()->SetNdivisions(-508);
     g->GetYaxis()->SetLabelSize(0.028);
     f->SetLineColor(kCyan);
 
@@ -64,11 +61,9 @@ int main(){
     pt->Draw();
 
     C->Update();
-    C->SaveAs("alfa_fit.png");
+    C->SaveAs("output/alfa_fit.png");
     gSystem->ProcessEvents();
     C->WaitPrimitive();
-
-    cout << "Energia do pico em unidades do pulser:" << f->GetParameter(0) * chn + f->GetParameter(1) << " MeV" << endl;
 
     delete C;
     delete g;

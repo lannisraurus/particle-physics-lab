@@ -2,7 +2,7 @@
 
 int main(){
     
-    data_colector beta("LAB6_BIS_SPC.ASC");
+    data_colector beta("input/LAB6_BIS_SPC.ASC");
     vector<double> x = beta.get_a_certain_col(1);
     vector<double> y = beta.get_a_certain_col(2);
 
@@ -95,7 +95,7 @@ int main(){
     //pt->Draw();
 
     C->Update();
-    C->SaveAs("esp_BIS.png");
+    C->SaveAs("output/esp_BIS.png");
     gSystem->ProcessEvents();
     C->WaitPrimitive();
 

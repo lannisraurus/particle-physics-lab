@@ -1,11 +1,12 @@
 #include "data_colector.cpp"
 
 int main(){
-    
-    data_colector beta("LAB6_BIS_AL_S.ASC");
-    vector<double> x = beta.get_a_certain_col(1);
-    vector<double> y = beta.get_a_certain_col(2);
 
+    data_colector alfa("input/LAB5_AMHIST.ASC");
+    vector<double> x = alfa.get_a_certain_col(1);
+    vector<double> y = alfa.get_a_certain_col(2);
+    
+    
     /*vector<int> pos_to_erase;
     int counter = 0;
 
@@ -51,18 +52,19 @@ int main(){
     f3->SetParameter(0, 1 / ( 10.96 / 2.355 * sqrt(2 * M_PI)));
     f3->SetParameter(1, 477.59);
     f3->SetParameter(2, 10.96 / 2.355);*/
-    
+
+
     /*pt->SetTextSize(0.032);
     pt->SetFillColor(0);
     pt->SetTextAlign(12);
     pt->SetTextFont(42);*/
     g->SetMarkerStyle(4);
-    g->SetMarkerColor(kAzure+2);
-    g->SetLineColor(kBlue+2);
+    g->SetMarkerColor(kGreen-3);
+    g->SetLineColor(kGreen+4);
     g->SetLineWidth(1.75);
-    g->GetXaxis()->SetTitle("Channel");
-    g->GetXaxis()->SetLimits(0, 150);
-    g->GetXaxis()->SetNdivisions(-515);
+    g->GetXaxis()->SetTitle("Channels");
+    g->GetXaxis()->SetLimits(325, 525);
+    g->GetXaxis()->SetNdivisions(-520);
 
     /*g->GetXaxis()->SetLimits(0, 525);
     g->GetXaxis()->SetNdivisions(-521); LOG */
@@ -73,8 +75,8 @@ int main(){
     g->GetXaxis()->SetTitleOffset(1.3);
     g->GetYaxis()->SetTitle("Absolute frequency");
     g->GetYaxis()->SetLabelSize(0.028);
-    g->GetYaxis()->SetRangeUser(0, 1800);
-    g->GetYaxis()->SetNdivisions(-418);
+    g->GetYaxis()->SetRangeUser(0, 13000);
+    g->GetYaxis()->SetNdivisions(-513);
 
     /*g->GetYaxis()->SetRangeUser(0, 4.5);
     g->GetYaxis()->SetNdivisions(-509); LOG */
@@ -83,7 +85,7 @@ int main(){
     f2->SetLineColor(kCyan);
     f3->SetLineColor(kRed-4);*/
 
-    g->Draw("APL");
+    g->Draw("");
     /*g->Fit("f1", "R");
     g->Fit("f2", "R+");
     g->Fit("f3", "R+");*/
@@ -94,7 +96,7 @@ int main(){
     //pt->Draw();
 
     C->Update();
-    C->SaveAs("esp_BIS_AL.png");
+    C->SaveAs("output/esp_am.png");
     gSystem->ProcessEvents();
     C->WaitPrimitive();
 

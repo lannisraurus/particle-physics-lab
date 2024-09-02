@@ -4,13 +4,13 @@ double get_seconds(string file_name);
 
 int main(){
     
-    string name = "LAB7_PB0.ASC"; // mudar o nome do ficheiro a retirar o fundo
+    string name = "input/LAB7_PB0.ASC"; // mudar o nome do ficheiro a retirar o fundo
     data_colector gamma1(name);
     vector<double> x1 = gamma1.get_a_certain_col(1);
     vector<double> y1 = gamma1.get_a_certain_col(2);
     double seconds1;
     Int_t points_numb = x1.size();
-    string bg = "LAB7_FUNDO.ASC"; // mudar o nome do ficheiro de fundo
+    string bg = "input/LAB7_FUNDO.ASC"; // mudar o nome do ficheiro de fundo
     data_colector gamma2(bg);
     vector<double> y2 = gamma2.get_a_certain_col(2);
     double seconds2;
